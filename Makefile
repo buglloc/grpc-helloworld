@@ -36,7 +36,7 @@ PROTOS_PATH = protos
 
 vpath %.proto $(PROTOS_PATH)
 
-all: system-check greeter_client greeter_server
+all: system-check gen-certs greeter_client greeter_server
 
 greeter_client: helloworld.pb.o helloworld.grpc.pb.o greeter_client.o
 	$(CXX) $^ $(LDFLAGS) -o $@
@@ -52,8 +52,11 @@ greeter_server: helloworld.pb.o helloworld.grpc.pb.o greeter_server.o
 %.pb.cc: %.proto
 	$(PROTOC) -I $(PROTOS_PATH) --cpp_out=. $<
 
+gen-certs:
+	./gen-certs.sh
+
 clean:
-	rm -f *.o *.pb.cc *.pb.h greeter_client greeter_server
+	rm -f *.key *.crt *.o *.pb.cc *.pb.h greeter_client greeter_server
 
 
 # The following is to test your system and ensure a smoother experience.
