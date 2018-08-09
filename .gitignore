@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+/greeter_client
+/greeter_client.o
+/greeter_server
+/greeter_server.o
+/*.crt
+/*.key
